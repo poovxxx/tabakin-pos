@@ -117,7 +117,7 @@
       color: #031207;
       box-shadow: var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.35);
     }
-    .btn-discount { background: rgba(255, 165, 36, 0.1); color: var(--accent-orange); border: 1px solid rgba(255, 165, 36, 0.35); box-shadow: 0 0 14px rgba(255, 165, 36, 0.12); }
+    .btn-discount { font-size: 13px; padding-left: 8px; padding-right: 8px; white-space: nowrap; background: rgba(255, 165, 36, 0.1); color: var(--accent-orange); border: 1px solid rgba(255, 165, 36, 0.35); box-shadow: 0 0 14px rgba(255, 165, 36, 0.12); }
     .btn-add {
       background: linear-gradient(180deg, #5eb0ff 0%, #2a83f0 100%);
       color: #fff; width: 100%; margin-top: 10px;
@@ -438,6 +438,7 @@
       const history = window.state.history || [];
       const items = window.state.items || [];
       const discount = window.state.discount ?? 100;
+      const discountLabel = discount > 0 ? `-${discount}` : discount < 0 ? `+${-discount}` : '0';
 
       // Дашборд
       const totalProfit = history.reduce((sum, h) => sum + h.profit, 0);
@@ -478,7 +479,7 @@
                 ⚡️ 1 шт (${p.sell} ₽)
               </button>
               <button class="btn btn-discount" ${isOut ? 'disabled style="display:none;"' : ''} onclick="sellWithDiscount(${p.id})">
-                🏷 Скидка (${discountedPrice} ₽)
+                🏷 ${discountLabel} ₽ (${discountedPrice} ₽)
               </button>
             </div>
             
